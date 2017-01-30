@@ -54,6 +54,8 @@ COOKIES_ENABLED = False
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': 100,
+    'scrapy_proxies.RandomProxy': 110,
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 120,
 }
 
 # Enable or disable extensions
@@ -88,3 +90,12 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# https://github.com/aivarsk/scrapy-proxies
+PROXY_LIST = '/opt/scrapy/proxy_list.txt'
+
+# Proxy mode
+# 0 = Every requests have different proxy
+# 1 = Take only one proxy from the list and assign it to every requests
+# 2 = Put a custom proxy to use in the settings
+PROXY_MODE = 0
